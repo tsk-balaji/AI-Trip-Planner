@@ -1,0 +1,164 @@
+/* 🌙 Dark Modern UI with Muted Palette */
+.trip-results {
+  background: #1e293b;
+  min-height: 100vh;
+  padding: 2rem;
+  color: #e2e8f0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 📌 Header Section */
+.trip-header {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(51, 65, 85, 0.8);
+  backdrop-filter: blur(10px);
+  /* padding: 1.5rem; */
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.trip-details h2,
+.map-header h3,
+.itinerary h3 {
+  color: #38bdf8;
+}
+
+.map-header,
+.itinerary-container h3 {
+  text-align: center;
+}
+
+.itinerary-container,
+.hotels {
+  margin: 20px 10px 20px 10px;
+  background: rgba(51, 65, 85, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 🗓 Timeline Itinerary */
+.itinerary {
+  text-align: center;
+  position: relative;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+/* 📍 Timeline Vertical Line */
+.itinerary::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: rgba(100, 116, 139, 0.6); /* Muted Blue */
+  transform: translateX(-50%);
+}
+
+/* 📅 Day Card as Timeline Item */
+.day-card {
+  background: rgba(31, 41, 55, 0.9);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  position: relative;
+  width: 45%;
+  text-align: left;
+}
+
+/* ✨ Alternate Cards Left & Right */
+.day-card:nth-child(odd) {
+  left: 0;
+}
+
+.day-card:nth-child(even) {
+  left: 55%;
+}
+
+/* 🔵 Circle Indicator */
+.day-card::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: calc(100% + 15px);
+  width: 16px;
+  height: 16px;
+  background: #38bdf8; /* Cool Cyan */
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+}
+
+.day-card:nth-child(even)::before {
+  left: -25px;
+}
+
+/* 📝 Activity List */
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-list li {
+  background: rgba(51, 65, 85, 0.8);
+  padding: 0.8rem;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.activity-list li strong {
+  color: #94a3b8;
+}
+
+.hotels {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel-container {
+  text-align: center;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.hotel-card {
+  background: #ffffff;
+  color: #222;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hotel-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 🌍 Responsive Design */
+@media (max-width: 768px) {
+  .itinerary::before {
+    left: 10px;
+  }
+
+  .day-card {
+    width: 90%;
+    left: 5% !important;
+  }
+
+  .day-card::before {
+    left: -25px !important;
+  }
+}
