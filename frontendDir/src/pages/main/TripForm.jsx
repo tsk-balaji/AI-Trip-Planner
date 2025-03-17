@@ -9,9 +9,12 @@ export default function TripForm({ onFormSubmit }) {
   const [origin, setOrigin] = useState("Chennai");
   const [destination, setDestination] = useState("Bengaluru");
   const [startDate, setStartDate] = useState("2025-03-25");
-  const [endDate, setEndDate] = useState("2026-03-28");
-  const [budget, setBudget] = useState("cheap");
+  const [endDate, setEndDate] = useState("2025-03-28");
+  const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
+
+  // const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URI;
+  const BACKEND_URL = "http://localhost:5000/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +38,7 @@ export default function TripForm({ onFormSubmit }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/geminiAI",
+        `${BACKEND_URL}api/geminiAI`,
         requestData
       );
       toast.success("Trip generated successfully!", { position: "top-center" });
@@ -55,7 +58,7 @@ export default function TripForm({ onFormSubmit }) {
   return (
     <div className="trip-form-container">
       <form onSubmit={handleSubmit} className="trip-form">
-        <h2>Plan Your Trip</h2>
+        <h2 id="tripform-h">Plan Your Trip</h2>
 
         <div className="form-group">
           <input

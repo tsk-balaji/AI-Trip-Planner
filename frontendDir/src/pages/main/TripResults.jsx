@@ -25,7 +25,6 @@ const TripResults = () => {
   }
 
   const tripPlan = tripData[0];
-  console.log(tripPlan);
   // const hotelOptions = tripPlan?.hotelOptions || [];
 
   return (

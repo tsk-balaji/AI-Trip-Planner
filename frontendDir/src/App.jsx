@@ -4,32 +4,21 @@ import ErrorBoundary from "./pages/main/Components/ErrorBoundary";
 
 const TripResult = lazy(() => import("./pages/main/TripResults"));
 
-// function ErrorBoundary({ children }) {
-//   try {
-//     return children;
-//   } catch (error) {
-//     return (
-//       (<p>Something went wrong. Please try again.</p>),
-//       console.log("Error:", error)
-//     );
-//   }
-// }
-
 function App() {
   const [showResults, setShowResults] = useState(false);
 
   return (
-    <>
-      {!showResults ? (
-        <TripForm onFormSubmit={() => setShowResults(true)} />
-      ) : (
-        <ErrorBoundary>
+    <ErrorBoundary>
+      <>
+        {!showResults ? (
+          <TripForm onFormSubmit={() => setShowResults(true)} />
+        ) : (
           <Suspense fallback={<p>Loading trip results...</p>}>
             <TripResult />
           </Suspense>
-        </ErrorBoundary>
-      )}
-    </>
+        )}
+      </>
+    </ErrorBoundary>
   );
 }
 
