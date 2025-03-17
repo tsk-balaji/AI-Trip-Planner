@@ -38,7 +38,7 @@ export default function TripForm({ onFormSubmit }) {
 
     try {
       const response = await axios.post(
-        `${BACKEND_URL}api/geminiAI`,
+        `${BACKEND_URL}/api/geminiAI`,
         requestData
       );
       toast.success("Trip generated successfully!", { position: "top-center" });
