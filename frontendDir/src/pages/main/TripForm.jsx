@@ -13,8 +13,8 @@ export default function TripForm({ onFormSubmit }) {
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
 
-  // const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URI;
-  const BACKEND_URL = "http://localhost:5000/";
+  const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URI;
+  // const BACKEND_URL = "http://localhost:5000/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
