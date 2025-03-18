@@ -14,7 +14,9 @@ initialise_Mongo_Connectivity();
 const app = express();
 
 // ✅ Allow requests from frontend (Replace with your frontend URL in production)
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(
+  cors({ origin: "https://tsk-ai-trip-planner.vercel.app/", credentials: true })
+);
 
 // OR allow all origins (Not recommended for production)
 app.use(cors());

@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
-console.log("Email User:", process.env.EMAIL_USER);
-console.log("Email Pass:", process.env.EMAIL_PASS);
 // Configure nodemailer
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -26,8 +24,6 @@ const generateToken = (id) =>
 // Register User
 exports.registerUser = async (req, res) => {
   try {
-    console.log("Request Body:", req.body);
-
     const { email, name, password, role } = req.body;
 
     // Check if required fields are provided

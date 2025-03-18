@@ -13,8 +13,7 @@ export default function TripForm({ onFormSubmit }) {
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
 
-  const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URI;
-  // const BACKEND_URL = "http://localhost:5000/";
+  // console.log(BACKEND_URL)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,9 +35,10 @@ export default function TripForm({ onFormSubmit }) {
       persons: numPersons,
     };
 
+    console.log(import.meta.env.VITE_BACKEND_URI);
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/geminiAI`,
+        "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI",
         requestData
       );
       toast.success("Trip generated successfully!", { position: "top-center" });
