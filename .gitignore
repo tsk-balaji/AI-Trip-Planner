@@ -29,3 +29,4 @@ backendDir/.env
 *.njsproj
 *.sln
 *.sw?
+frontendDir/src/.env

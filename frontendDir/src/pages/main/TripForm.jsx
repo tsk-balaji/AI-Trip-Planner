@@ -13,7 +13,8 @@ export default function TripForm({ onFormSubmit }) {
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
 
-  // console.log(BACKEND_URL)
+  const BACKEND_URL =
+    import.meta.env.VITE_BACKEND_URI || "http://localhost:5000/api/geminiAI"; // Fallback for dev
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,21 +36,19 @@ export default function TripForm({ onFormSubmit }) {
       persons: numPersons,
     };
 
-    console.log(import.meta.env.VITE_BACKEND_URI);
     try {
-      const response = await axios.post(
-        "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI",
-        requestData
-      );
+      const response = await axios.post(BACKEND_URL, requestData, {
+        timeout: 10000, // Prevent hanging
+      });
       toast.success("Trip generated successfully!", { position: "top-center" });
-
       setTripData(response.data.tripPlan);
-
-      // **Unmount TripForm & Show TripResults**
       onFormSubmit();
     } catch (error) {
       console.error("Error submitting trip:", error);
-      toast.error("Failed to generate trip. Try again!");
+      toast.error(
+        error.response?.data?.message || "Failed to generate trip. Try again!",
+        { position: "top-center" }
+      );
     } finally {
       setLoading(false);
     }
@@ -59,7 +58,7 @@ export default function TripForm({ onFormSubmit }) {
     <div className="trip-form-container">
       <form onSubmit={handleSubmit} className="trip-form">
         <h2 id="tripform-h">Plan Your Trip</h2>
-
+        {/* Form inputs unchanged */}
         <div className="form-group">
           <input
             type="text"
@@ -76,7 +75,6 @@ export default function TripForm({ onFormSubmit }) {
             className="form-input"
           />
         </div>
-
         <div className="form-group">
           <input
             type="date"
@@ -91,7 +89,6 @@ export default function TripForm({ onFormSubmit }) {
             className="form-input"
           />
         </div>
-
         <label className="form-label">Select Your Budget</label>
         <div className="selection-group">
           {["cheap", "moderate", "luxury"].map((type) => (
@@ -107,7 +104,6 @@ export default function TripForm({ onFormSubmit }) {
             </div>
           ))}
         </div>
-
         <label className="form-label">Who Are You Traveling With?</label>
         <div className="selection-group">
           {[1, 2, 3, 5].map((num) => (
@@ -131,12 +127,10 @@ export default function TripForm({ onFormSubmit }) {
             </div>
           ))}
         </div>
-
         <button type="submit" className="submit-btn">
           Generate Trip
         </button>
       </form>
-
       <ToastContainer />
     </div>
   );
