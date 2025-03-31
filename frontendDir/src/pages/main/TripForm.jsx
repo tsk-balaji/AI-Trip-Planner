@@ -36,9 +36,7 @@ export default function TripForm({ onFormSubmit }) {
     };
 
     try {
-      const response = await axios.post(BACKEND_URL, requestData, {
-        timeout: 10000, // Prevent hanging
-      });
+      const response = await axios.post(BACKEND_URL, requestData);
       toast.success("Trip generated successfully!", { position: "top-center" });
       setTripData(response.data.tripPlan);
       onFormSubmit();
