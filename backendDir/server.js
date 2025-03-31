@@ -13,17 +13,18 @@ initialise_Mongo_Connectivity();
 
 const app = express();
 
-// ✅ Allow requests from frontend (Replace with your frontend URL in production)
-app.use(
-  cors({ origin: "https://tsk-ai-trip-planner.vercel.app/", credentials: true })
-);
+// Use a single CORS configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "https://tsk-ai-trip-planner.vercel.app/" || "https://ai-trip-planner-pwa6-pp0johhs7-tskbalaji-134829cc.vercel.app/", 
+  credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-// OR allow all origins (Not recommended for production)
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(express.json());
-app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
 app.use(cookieParser());
 
 // Routes
