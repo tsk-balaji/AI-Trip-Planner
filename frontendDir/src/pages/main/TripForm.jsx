@@ -13,7 +13,7 @@ export default function TripForm({ onFormSubmit }) {
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
 
-  const BACKEND_URL = "https://ai-trip-planner-ymrv.onrender.com/geminiAI"; // Fallback for dev
+  const BACKEND_URL = "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI"; // Fallback for dev
 
   const handleSubmit = async (e) => {
     e.preventDefault();
