@@ -4,6 +4,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "./TripForm.css";
 import { TripContext } from "../main/utils/TripContext";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI";
+const REQUEST_TIMEOUT = 180000;
+
 export default function TripForm({ onFormSubmit }) {
   const { setTripData, setLoading } = useContext(TripContext);
   const [origin, setOrigin] = useState("Chennai");
@@ -13,15 +16,20 @@ export default function TripForm({ onFormSubmit }) {
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
 
-  const BACKEND_URL = "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI"; // Fallback for dev
+  const validateForm = () => {
+    if (!origin || !destination || !startDate || !endDate || !budget) {
+      toast.error("All fields are required!", { position: "bottom-right" });
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setTripData(null);
 
-    if (!origin || !destination || !startDate || !endDate || !budget) {
-      toast.error("All fields are required!", { position: "bottom-right" });
+    if (!validateForm()) {
       setLoading(false);
       return;
     }
@@ -36,16 +44,14 @@ export default function TripForm({ onFormSubmit }) {
     };
 
     try {
-      const response = await axios.post(BACKEND_URL, requestData, { timeout: 180000 });
+      const response = await axios.post(BACKEND_URL, requestData, { timeout: REQUEST_TIMEOUT });
       toast.success("Trip generated successfully!", { position: "top-center" });
       setTripData(response.data.tripPlan);
       onFormSubmit();
     } catch (error) {
       console.error("Error submitting trip:", error);
-      toast.error(
-        error.response?.data?.message || "Failed to generate trip. Try again!",
-        { position: "top-center" }
-      );
+      const errorMessage = error.response?.data?.message || "Failed to generate trip. Try again!";
+      toast.error(errorMessage, { position: "top-center" });
     } finally {
       setLoading(false);
     }
