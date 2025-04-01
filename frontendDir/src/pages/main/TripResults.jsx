@@ -17,89 +17,80 @@ const TripResults = () => {
   const { tripData, loading } = useContext(TripContext);
 
   if (loading) {
-    return <p>Fetching Data...</p>;
+    return (
+      <div className="loading-container">
+        <p>Fetching Data...</p>
+      </div>
+    );
   }
 
   if (!tripData?.length) {
-    return <p>No Data Available</p>;
+    return (
+      <div className="no-data-container">
+        <p>No Data Available</p>
+      </div>
+    );
   }
 
   const tripPlan = tripData[0];
-  // const hotelOptions = tripPlan?.hotelOptions || [];
 
   return (
     <div className="trip-results">
-      <div className="trip-header">
-        <div className="trip-details col-5 p-2">
-          <h2>{`Travel Plan for ${tripPlan?.tripDetails?.startCity} to ${tripPlan?.tripDetails?.endCity}`}</h2>
-          <p>
-            Dates: {formatDate(tripPlan?.tripDetails?.startDate)} -{" "}
-            {formatDate(tripPlan?.tripDetails?.endDate)}
-          </p>
-          <p>Travelers: {tripPlan?.tripDetails?.travelers}</p>
-          <p>Budget: {tripPlan?.tripDetails?.budget}</p>
+      <section className="trip-header">
+        <div className="trip-details">
+          <h2>
+            {`Travel Plan: ${tripPlan?.tripDetails?.startCity} → ${tripPlan?.tripDetails?.endCity}`}
+          </h2>
+          <div className="trip-meta">
+            <span>
+              <i className="icon-calendar"></i>
+              {formatDate(tripPlan?.tripDetails?.startDate)} -{" "}
+              {formatDate(tripPlan?.tripDetails?.endDate)}
+            </span>
+            <span>
+              <i className="icon-users"></i>
+              {tripPlan?.tripDetails?.travelers} Travelers
+            </span>
+            <span>
+              <i className="icon-budget"></i>
+              Budget: {tripPlan?.tripDetails?.budget}
+            </span>
+          </div>
         </div>
-        <div className="map-header col-5">
-          <h3>Map View</h3>
+        <div className="map-container">
+          <h3>Route Overview</h3>
           {tripPlan?.mapUIData ? (
             <RouteMap mapUIData={tripPlan.mapUIData} />
           ) : (
-            <p>🏞️ No map data available.</p>
+            <div className="map-placeholder">🏞️ No map data available</div>
           )}
         </div>
-      </div>
-      <div className="itinerary-container col-12">
-        <h3>Itinerary</h3>
-        <div className="timeline">
-          <div className="itinerary">
-            {Object.keys(tripPlan.itinerary).map((dayKey) => {
-              const day = tripPlan.itinerary[dayKey];
-              return (
-                <div key={dayKey} className="day-card">
-                  <h4>{`Day ${dayKey.replace("day", "")} - ${day.date}`}</h4>
-                  <ul className="activity-list">
-                    {day.activities.map((activity, i) => (
-                      <li key={i}>
-                        <strong>{activity.time}:</strong> {activity.description}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      {/* <div className="hotels">
-        <h3>Hotel Options</h3>
-        <div className="hotels-container">
-          {hotelOptions.map((hotel, index) => (
-            <div key={index} className="hotel-card card">
-              <img
-                src={hotel.imageURL || "https://via.placeholder.com/200"}
-                alt={hotel.name || "Hotel Image"}
-                className="card-img-top"
-              />
-              <div className="card-body">
-                <h5>{hotel.name}</h5>
-                <p>Rating: {hotel.rating} ⭐</p>
-                <p>{hotel.description}</p>
-                <p>Price: ₹{hotel.price}</p>
-                {hotel.coordinates && (
-                  <a
-                    href={`https://www.google.com/maps?q=${hotel.coordinates.latitude},${hotel.coordinates.longitude}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary"
-                  >
-                    Get Directions
-                  </a>
-                )}
+      </section>
+
+      <section className="itinerary-section">
+        <h3>Your Itinerary</h3>
+        <div className="itinerary-wrapper">
+          {Object.entries(tripPlan.itinerary).map(([dayKey, day], index) => (
+            <div key={dayKey} className="day-card" data-day={index + 1}>
+              <div className="day-header">
+                <h4>
+                  Day {dayKey.replace("day", "")} - {day.date}
+                </h4>
               </div>
+              <ul className="activity-list">
+                {day.activities.map((activity, i) => (
+                  <li key={i} className="activity-item">
+                    <span className="activity-time">{activity.time}</span>
+                    <span className="activity-desc">
+                      {activity.description}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
-      </div> */}
+      </section>
     </div>
   );
 };
