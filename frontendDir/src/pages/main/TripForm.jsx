@@ -5,6 +5,7 @@ import "./TripForm.css";
 import { TripContext } from "../main/utils/TripContext";
 
 const BACKEND_URL = "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI";
+// const BACKEND_URL = "http://localhost:5000/api/geminiAI";
 const REQUEST_TIMEOUT = 180000;
 
 export default function TripForm({ onFormSubmit }) {
