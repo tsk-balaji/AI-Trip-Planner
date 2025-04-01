@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import RouteMap from "./Components/RouteMap";
-import "../main/TripResults.css";
+import "../main/TripResult.css";
 import { TripContext } from "./utils/TripContext";
 
 const formatDate = (dateString) => {
