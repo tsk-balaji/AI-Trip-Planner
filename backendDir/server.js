@@ -16,8 +16,8 @@ const app = express();
 // Use a single CORS configuration
 const corsOptions = {
   origin:
-    "https://tsk-ai-trip-planner.vercel.app/" ||
-    "https://ai-trip-planner-pwa6-pp0johhs7-tskbalaji-134829cc.vercel.app/",
+    "https://ai-trip-planner-pwa6-tskbalaji-134829cc.vercel.app/" ||
+    "https://ai-trip-planner-pwa6-git-main-tskbalaji-134829cc.vercel.app/",
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   allowedHeaders: ["Content-Type", "Authorization"],
