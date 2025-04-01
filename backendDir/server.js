@@ -13,18 +13,7 @@ initialise_Mongo_Connectivity();
 
 const app = express();
 
-// Use a single CORS configuration
-const corsOptions = {
-  origin:
-    "https://ai-trip-planner-pwa6-tskbalaji-134829cc.vercel.app/" ||
-    "https://ai-trip-planner-pwa6-git-main-tskbalaji-134829cc.vercel.app/" ||
-    "https://ai-trip-planner-pwa6-g51jf6mm2-tskbalaji-134829cc.vercel.app/",
-  credentials: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Middleware
 app.use(express.json());
