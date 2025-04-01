@@ -1,0 +1,368 @@
+/* 🌙 Modern Dark Theme with Teal Accents */
+body {
+  background: #111827; /* Darker, more modern background */
+  color: #f9fafb; /* Off-white, slightly warmer text */
+  font-family: "Poppins", sans-serif;
+  line-height: 1.6;
+}
+
+.trip-results-container {
+  padding: 2rem;
+  max-width: 1200px; /* Increased max-width for larger screens */
+  margin: 0 auto; /* Center the whole container */
+}
+
+.loading-container,
+.no-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 1.2rem;
+  color: #d1d5db; /* Slightly lighter text for these states */
+}
+
+/* 📌 Header Section */
+.trip-header {
+  display: grid;
+  grid-template-columns: 1fr; /* Stack on small screens, go side-by-side on larger */
+  gap: 2rem;
+  background: rgba(
+    17,
+    24,
+    39,
+    0.8
+  ); /* Slightly darker, more transparent background */
+  backdrop-filter: blur(12px); /* Slightly stronger blur */
+  padding: 2.5rem; /* Slightly increased padding */
+  border-radius: 1rem; /* More rounded corners */
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+}
+
+@media (min-width: 768px) {
+  .trip-header {
+    grid-template-columns: 1fr 1fr; /* Side-by-side on larger screens */
+  }
+}
+
+.trip-details h2 {
+  color: #6ee7b7; /* Teal accent color - vibrant and modern */
+  margin-bottom: 1.5rem; /* Increased margin */
+  font-size: 2.25rem; /* Larger heading */
+  font-weight: 600; /* Semi-bold font weight */
+}
+
+.trip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 1rem;
+  color: #cbd5e0; /* Slightly lighter meta text */
+}
+
+.trip-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem; /* Increased gap */
+}
+
+.trip-meta i {
+  font-size: 1.2rem;
+  color: #9ca3af; /* Medium gray icon color */
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.map-container h3 {
+  color: #6ee7b7; /* Teal accent color */
+  text-align: center;
+  font-size: 1.5rem; /* Larger heading */
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.map-placeholder {
+  height: 250px; /* Increased height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(31, 41, 55, 0.8); /* Slightly more transparent */
+  border-radius: 0.75rem; /* More rounded corners */
+  color: #d1d5db;
+  font-size: 1.1rem;
+  border: 2px dashed #4b5563; /* Dashed border */
+}
+
+/* 🗓 Itinerary Section */
+.itinerary-section {
+  background: rgba(17, 24, 39, 0.8); /* Slightly darker, more transparent */
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.itinerary-section h3 {
+  color: #6ee7b7; /* Teal accent color */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem; /* Larger heading */
+  font-weight: 600;
+}
+
+.itinerary-wrapper {
+  position: relative;
+  padding: 0; /* Removed padding, will adjust card positioning */
+}
+
+.itinerary-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #6ee7b7, #1e293b); /* Teal gradient */
+  transform: translateX(-50%);
+  z-index: 1; /* Ensure the line is behind the cards */
+}
+
+.day-card {
+  background: rgba(31, 41, 55, 0.95); /* Slightly more opaque */
+  padding: 2rem; /* Increased padding */
+  border-radius: 1rem; /* More rounded corners */
+  margin: 2rem 0; /* Increased vertical margin */
+  position: relative;
+  width: 100%; /* Full width on small screens */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
+}
+
+@media (min-width: 768px) {
+  .day-card {
+    width: 48%; /* ~50% width on larger screens for side-by-side layout */
+  }
+
+  .day-card:nth-child(odd) {
+    margin-right: 52%; /* Space between cards */
+    margin-left: 0;
+  }
+
+  .day-card:nth-child(even) {
+    margin-left: 52%;
+    margin-right: 0;
+  }
+}
+
+.day-card::before {
+  content: attr(data-day);
+  position: absolute;
+  top: 2rem; /* Increased top position */
+  width: 36px; /* Increased size of the circle */
+  height: 36px;
+  background: #6ee7b7; /* Teal circle */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem; /* Larger font size */
+  font-weight: 600; /* Semi-bold font */
+  color: #0f172a; /* Dark text color inside the circle */
+  z-index: 2; /* Ensure the circle is above the line */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow to the circle */
+}
+
+.day-card:nth-child(odd)::before {
+  right: -1.5rem; /* Adjusted positioning */
+  left: auto;
+}
+
+.day-card:nth-child(even)::before {
+  left: -1.5rem;
+  right: auto;
+}
+
+.day-header h4 {
+  color: #e2e8f0; /* Lighter heading color */
+  margin-bottom: 1.5rem; /* Increased margin */
+  font-size: 1.25rem; /* Larger heading */
+  font-weight: 600;
+}
+
+.activity-list {
+  padding: 0;
+  list-style: none;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1.5rem; /* Increased gap */
+  padding: 1.25rem; /* Increased padding */
+  background: rgba(31, 41, 55, 0.8);
+  border-radius: 0.75rem; /* More rounded corners */
+  margin-bottom: 1rem; /* Increased margin */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.activity-time {
+  min-width: 80px; /* Increased width */
+  color: #6ee7b7; /* Teal time color */
+  font-weight: 600; /* Semi-bold font */
+  font-size: 1.1rem;
+}
+
+.activity-desc {
+  flex: 1;
+  color: #f9fafb;
+  font-size: 1.1rem;
+}
+
+/* 🏨 Hotel Section */
+.hotel-section {
+  margin-top: 4rem; /* Increased margin */
+}
+
+.hotel-section h3 {
+  color: #6ee7b7; /* Teal accent color */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem; /* Larger heading */
+  font-weight: 600;
+}
+
+.hotel-wrapper {
+  display: grid;
+  grid-template-columns: 1fr; /* Stack on small screens */
+  gap: 2rem; /* Increased gap */
+}
+
+@media (min-width: 768px) {
+  .hotel-wrapper {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(350px, 1fr)
+    ); /* 2 columns on larger screens */
+  }
+}
+
+.hotel-card {
+  background: rgba(31, 41, 55, 0.95);
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Slightly stronger shadow */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hotel-card:hover {
+  transform: translateY(-0.5rem); /* Slight lift on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
+}
+
+.hotel-image {
+  width: 100%;
+  height: 250px; /* Increased height */
+  object-fit: cover;
+  border-radius: 0.75rem; /* More rounded corners */
+  margin-bottom: 1.5rem; /* Increased margin */
+}
+
+.hotel-name {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 1.5rem; /* Larger heading */
+  font-weight: 600;
+}
+
+.hotel-rating {
+  color: #a0aec0;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.hotel-price {
+  color: #6ee7b7; /* Teal price color */
+  margin-bottom: 1rem;
+  font-size: 1.25rem; /* Larger price */
+  font-weight: 600;
+}
+
+.hotel-description {
+  color: #f9fafb;
+  font-size: 1.1rem;
+  line-height: 1.7; /* Increased line height */
+}
+
+/* 📱 Responsive Design (Tablet and Mobile) */
+@media (max-width: 768px) {
+  .trip-header {
+    grid-template-columns: 1fr; /* Stack on small screens */
+    padding: 1.5rem;
+  }
+
+  .trip-details h2 {
+    font-size: 1.75rem; /* Smaller heading on mobile */
+  }
+
+  .trip-meta {
+    gap: 1rem;
+  }
+
+  .map-container h3 {
+    font-size: 1.25rem;
+  }
+
+  .itinerary-section {
+    padding: 1.5rem;
+  }
+
+  .itinerary-wrapper::before {
+    left: 1rem; /* Adjust line position on mobile */
+  }
+
+  .day-card {
+    width: 100%;
+    margin: 1.5rem auto;
+  }
+
+  .day-card::before {
+    left: 1rem !important; /* Adjust circle position on mobile */
+    right: auto !important;
+    top: 1.5rem;
+  }
+
+  .activity-time {
+    min-width: 60px;
+  }
+  .hotel-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Specific Styles */
+@media (max-width: 480px) {
+  .trip-meta {
+    flex-direction: column;
+  }
+
+  .trip-meta span {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .activity-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .activity-time {
+    min-width: auto;
+  }
+}
