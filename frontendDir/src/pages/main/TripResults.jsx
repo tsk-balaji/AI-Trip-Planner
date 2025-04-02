@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-// import { motion } from "framer-motion"; // Only import the necessary functions
+import { motion } from "framer-motion";
 import { TripContext } from "./utils/TripContext";
 import "../main/TripResults.css";
 
