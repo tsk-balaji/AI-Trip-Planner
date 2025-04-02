@@ -39,7 +39,7 @@ const Login = () => {
       console.log("User Details Saved:", localStorage.getItem("userDetails"));
 
       // Step 3: Redirect to dashboard
-      navigate("/dashboard");
+      navigate("/generate-trip");
     } catch (error) {
       console.error(error); // Log error details for debugging
       setError(error.response?.data?.message || "Login failed");
