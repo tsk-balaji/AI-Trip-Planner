@@ -48,8 +48,8 @@ Below is the flow chart depicting the application's architecture and workflow:
 
 4. Access the application:
 
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
+   - Frontend: https://tsk-ai-trip-planner.vercel.app/
+   - Backend API: https://ai-trip-planner-ymrv.onrender.com/
 
 ## Usage
 
@@ -101,4 +101,4 @@ Contributions are welcome! Please fork the repository and submit a pull request.
 
 ## Contact
 
-For any inquiries or support, please contact your-email@example.com.
+For any inquiries or support, please contact tskbalaji15@gmail.com.
