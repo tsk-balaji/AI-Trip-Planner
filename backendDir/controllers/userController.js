@@ -189,7 +189,7 @@ exports.forgotPassword = async (req, res) => {
     user.resetPasswordExpire = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `https://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://tsk-ai-trip-planner.vercel.app/reset-password/${resetToken}`;
 
     // Send reset password email
     await transporter.sendMail({
