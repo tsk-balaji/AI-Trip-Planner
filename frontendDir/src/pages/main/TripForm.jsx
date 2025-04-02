@@ -1,13 +1,15 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./TripForm.css";
 import { TripContext } from "../main/utils/TripContext";
 
 const BACKEND_URL = "https://ai-trip-planner-ymrv.onrender.com/api/geminiAI";
 const REQUEST_TIMEOUT = 180000;
 
-export default function TripForm({ onFormSubmit }) {
+export default function TripForm() {
+  // Removed onFormSubmit prop
   const { setTripData, setLoading } = useContext(TripContext);
   const [origin, setOrigin] = useState("Chennai");
   const [destination, setDestination] = useState("Bengaluru");
@@ -15,6 +17,7 @@ export default function TripForm({ onFormSubmit }) {
   const [endDate, setEndDate] = useState("2025-03-28");
   const [budget, setBudget] = useState("Cheap");
   const [numPersons, setNumPersons] = useState(1);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const validateForm = () => {
     if (!origin || !destination || !startDate || !endDate || !budget) {
@@ -49,7 +52,7 @@ export default function TripForm({ onFormSubmit }) {
       });
       toast.success("Trip generated successfully!", { position: "top-center" });
       setTripData(response.data.tripPlan);
-      onFormSubmit();
+      navigate("/trip-result"); // Navigate to /trip-result after successful submission
     } catch (error) {
       console.error("Error submitting trip:", error);
       const errorMessage =
@@ -64,7 +67,6 @@ export default function TripForm({ onFormSubmit }) {
     <div className="trip-form-container">
       <form onSubmit={handleSubmit} className="trip-form">
         <h2 id="tripform-h">Plan Your Trip</h2>
-        {/* Form inputs unchanged */}
         <div className="form-group">
           <input
             type="text"

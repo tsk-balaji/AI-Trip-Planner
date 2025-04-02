@@ -65,7 +65,7 @@ exports.registerUser = async (req, res) => {
 
     // Generate activation token
     const activationToken = generateToken(newUser._id);
-    const activationLink = `https://localhost:5000/api/auth/activate/${activationToken}`;
+    const activationLink = `https://ai-trip-planner-ymrv.onrender.com/api/activate-account/${activationToken}`;
 
     // Send activation email
     await transporter.sendMail({
