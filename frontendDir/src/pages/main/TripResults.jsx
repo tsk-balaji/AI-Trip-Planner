@@ -120,14 +120,9 @@ const TripResults = () => {
       {hotelOptions?.length > 0 && (
         <section className="hotel-section">
           <h3 className="section-title">Hotel Suggestions</h3>
-          <div className="hotel-wrapper">
+          <ul className="hotel-list">
             {hotelOptions.map((hotel, index) => (
-              <div key={index} className="hotel-card">
-                <img
-                  src={hotel.imageURL}
-                  alt={`Image of ${hotel.name}`}
-                  className="hotel-image"
-                />
+              <li key={index} className="hotel-list-item">
                 <div className="hotel-details">
                   <h4 className="hotel-name">{hotel.name}</h4>
                   {hotel.rating && (
@@ -140,9 +135,9 @@ const TripResults = () => {
                     <p className="hotel-description">{hotel.description}</p>
                   )}
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       )}
     </div>
