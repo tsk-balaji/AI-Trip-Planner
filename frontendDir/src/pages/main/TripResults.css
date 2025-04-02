@@ -1,15 +1,19 @@
 /* 🌙 Modern Dark Theme with Teal Accents */
 body {
-  background: #111827; /* Darker, more modern background */
-  color: #f9fafb; /* Off-white, slightly warmer text */
+  background: #111827;
+  color: #f9fafb;
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInBody 1.2s ease-out forwards;
 }
 
 .trip-results-container {
   padding: 2rem;
-  max-width: 1200px; /* Increased max-width for larger screens */
-  margin: 0 auto; /* Center the whole container */
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: all 0.5s ease;
+  animation: slideUpExpand 1s ease-out forwards;
 }
 
 .loading-container,
@@ -19,472 +23,167 @@ body {
   align-items: center;
   min-height: 50vh;
   font-size: 1.2rem;
-  color: #d1d5db; /* Slightly lighter text for these states */
+  color: #d1d5db;
+  transition: all 0.6s ease;
+  animation: fadeInScalePulse 1.2s ease-out infinite alternate;
 }
 
 /* 📌 Header Section */
 .trip-header {
-  display: grid;
-  grid-template-columns: 1fr; /* Stack on small screens, go side-by-side on larger */
-  gap: 2rem;
-  background: rgba(
-    17,
-    24,
-    39,
-    0.8
-  ); /* Slightly darker, more transparent background */
-  backdrop-filter: blur(12px); /* Slightly stronger blur */
-  padding: 2.5rem; /* Slightly increased padding */
-  border-radius: 1rem; /* More rounded corners */
-  margin-bottom: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
-}
-
-@media (min-width: 768px) {
-  .trip-header {
-    grid-template-columns: 1fr 1fr; /* Side-by-side on larger screens */
-  }
-}
-
-.trip-details h3 {
-  color: #6ee7b7; /* Teal accent color - vibrant and modern */
-  margin-bottom: 1.5rem; /* Increased margin */
-  font-size: 0.5rem; /* Larger heading */
-  font-weight: 600; /* Semi-bold font weight */
-}
-
-.trip-meta {
   display: flex;
-  flex-direction: column;
-  align-content: center;
-  /* flex-wrap: wrap; */
-  gap: 1.5rem;
-  font-size: 1rem;
-  color: #cbd5e0; /* Slightly lighter meta text */
-}
-
-.trip-meta span {
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.75rem; /* Increased gap */
-}
-
-.trip-meta i {
-  font-size: 1.2rem;
-  color: #9ca3af; /* Medium gray icon color */
-}
-
-.map-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.map-container h3 {
-  color: #6ee7b7; /* Teal accent color */
-  text-align: center;
-  font-size: 1.5rem; /* Larger heading */
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.map-placeholder {
-  height: 250px; /* Increased height */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(31, 41, 55, 0.8); /* Slightly more transparent */
-  border-radius: 0.75rem; /* More rounded corners */
-  color: #d1d5db;
-  font-size: 1.1rem;
-  border: 2px dashed #4b5563; /* Dashed border */
-}
-
-/* 🗓 Itinerary Section */
-.itinerary-section {
-  background: rgba(17, 24, 39, 0.8); /* Slightly darker, more transparent */
+  background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(12px);
   padding: 2.5rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation: slideInDownBounce 1.4s ease-out forwards;
 }
 
-.itinerary-section h3 {
-  color: #6ee7b7; /* Teal accent color */
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.5rem; /* Larger heading */
-  font-weight: 600;
-}
-
-.itinerary-wrapper {
-  position: relative;
-  padding: 0; /* Removed padding, will adjust card positioning */
-}
-
-.itinerary-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(to bottom, #6ee7b7, #1e293b); /* Teal gradient */
-  transform: translateX(-50%);
-  z-index: 1; /* Ensure the line is behind the cards */
-}
-
-.day-card {
-  background: rgba(31, 41, 55, 0.95); /* Slightly more opaque */
-  padding: 2rem; /* Increased padding */
-  border-radius: 1rem; /* More rounded corners */
-  margin: 2rem 0; /* Increased vertical margin */
-  position: relative;
-  width: 100%; /* Full width on small screens */
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
-}
-
-@media (min-width: 768px) {
-  .day-card {
-    width: 48%; /* ~50% width on larger screens for side-by-side layout */
-  }
-
-  .day-card:nth-child(odd) {
-    margin-right: 52%; /* Space between cards */
-    margin-left: 0;
-  }
-
-  .day-card:nth-child(even) {
-    margin-left: 52%;
-    margin-right: 0;
-  }
-}
-
-.day-card::before {
-  content: attr(data-day);
-  position: absolute;
-  top: 2rem; /* Increased top position */
-  width: 36px; /* Increased size of the circle */
-  height: 36px;
-  background: #6ee7b7; /* Teal circle */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem; /* Larger font size */
-  font-weight: 600; /* Semi-bold font */
-  color: #0f172a; /* Dark text color inside the circle */
-  z-index: 2; /* Ensure the circle is above the line */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow to the circle */
-}
-
-.day-card:nth-child(odd)::before {
-  right: -1.5rem; /* Adjusted positioning */
-  left: auto;
-}
-
-.day-card:nth-child(even)::before {
-  left: -1.5rem;
-  right: auto;
-}
-
-.day-header h4 {
-  color: #e2e8f0; /* Lighter heading color */
-  margin-bottom: 1.5rem; /* Increased margin */
-  font-size: 1.25rem; /* Larger heading */
-  font-weight: 600;
-}
-
-.activity-list {
-  padding: 0;
-  list-style: none;
-}
-
-.activity-item {
-  display: flex;
-  gap: 1.5rem; /* Increased gap */
-  padding: 1.25rem; /* Increased padding */
-  background: rgba(31, 41, 55, 0.8);
-  border-radius: 0.75rem; /* More rounded corners */
-  margin-bottom: 1rem; /* Increased margin */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.activity-time {
-  min-width: 80px; /* Increased width */
-  color: #6ee7b7; /* Teal time color */
-  font-weight: 600; /* Semi-bold font */
-  font-size: 1.1rem;
-}
-
-.activity-desc {
-  flex: 1;
-  color: #f9fafb;
-  font-size: 1.1rem;
-}
-
-/* 🏨 Hotel Section */
-.hotel-section {
-  margin-top: 4rem; /* Increased margin */
-}
-
-.hotel-section h3 {
-  color: #6ee7b7; /* Teal accent color */
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.5rem; /* Larger heading */
-  font-weight: 600;
-}
-
-.hotel-wrapper {
-  display: grid;
-  grid-template-columns: 1fr; /* Stack on small screens */
-  gap: 2rem; /* Increased gap */
-}
-
-@media (min-width: 768px) {
-  .hotel-wrapper {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(350px, 1fr)
-    ); /* 2 columns on larger screens */
-  }
-}
-
-.hotel-card {
-  background: rgba(31, 41, 55, 0.95);
-  padding: 2rem;
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Slightly stronger shadow */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.hotel-card:hover {
-  transform: translateY(-0.5rem); /* Slight lift on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
-}
-
-.hotel-image {
-  width: 100%;
-  height: 250px; /* Increased height */
-  object-fit: cover;
-  border-radius: 0.75rem; /* More rounded corners */
-  margin-bottom: 1.5rem; /* Increased margin */
-}
-
-.hotel-name {
-  color: #fff;
-  margin-bottom: 1rem;
-  font-size: 1.5rem; /* Larger heading */
-  font-weight: 600;
-}
-
-.hotel-rating {
-  color: #a0aec0;
-  margin-bottom: 0.75rem;
-  font-size: 1rem;
-}
-
-.hotel-price {
-  color: #6ee7b7; /* Teal price color */
-  margin-bottom: 1rem;
-  font-size: 1.25rem; /* Larger price */
-  font-weight: 600;
-}
-
-.hotel-description {
-  color: #f9fafb;
-  font-size: 1.1rem;
-  line-height: 1.7; /* Increased line height */
-}
-
-/* 📱 Responsive Design (Tablet and Mobile) */
-@media (max-width: 768px) {
-  .trip-header {
-    grid-template-columns: 1fr; /* Stack on small screens */
-    padding: 1.5rem;
-  }
-
-  .trip-details h2 {
-    font-size: 1.75rem; /* Smaller heading on mobile */
-  }
-
-  .trip-meta {
-    gap: 1rem;
-  }
-
-  .map-container h3 {
-    font-size: 1.25rem;
-  }
-
-  .itinerary-section {
-    padding: 1.5rem;
-  }
-
-  .itinerary-wrapper::before {
-    left: 1rem; /* Adjust line position on mobile */
-  }
-
-  .day-card {
-    width: 100%;
-    margin: 1.5rem auto;
-  }
-
-  .day-card::before {
-    left: 1rem !important; /* Adjust circle position on mobile */
-    right: auto !important;
-    top: 1.5rem;
-  }
-
-  .activity-time {
-    min-width: 60px;
-  }
-  .hotel-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Mobile Specific Styles */
-@media (max-width: 480px) {
-  .trip-meta {
-    flex-direction: column;
-  }
-
-  .trip-meta span {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .activity-item {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .activity-time {
-    min-width: auto;
-  }
-}
-
-/* 🌙 Modern Dark Theme with Teal Accents */
-body {
-  background: #111827; /* Darker, more modern background */
-  color: #f9fafb; /* Off-white, slightly warmer text */
-  font-family: "Poppins", sans-serif;
-  line-height: 1.6;
-}
-
-.trip-results-container {
-  padding: 2rem;
-  max-width: 1200px; /* Increased max-width for larger screens */
-  margin: 0 auto; /* Center the whole container */
-}
-
-/* 📌 Header Section */
-.trip-header {
-  display: flex;
-  justify-content: space-between; /* Distribute space between map and meta details */
-  align-items: center;
-  background: rgba(
-    17,
-    24,
-    39,
-    0.8
-  ); /* Slightly darker, more transparent background */
-  backdrop-filter: blur(12px); /* Slightly stronger blur */
-  padding: 2.5rem; /* Slightly increased padding */
-  border-radius: 1rem; /* More rounded corners */
-  margin-bottom: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+.trip-header:hover {
+  transform: scale(1.02) rotate(1deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .trip-header .trip-title {
   font-size: 1.5rem;
-  color: #6ee7b7; /* Teal accent color */
-  font-weight: 600; /* Bold title */
+  color: #6ee7b7;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 1.5rem;
+  transition: all 0.4s ease;
+  animation: bounceIn 1s ease-out forwards;
+}
+
+.trip-header .trip-title:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #8bf6cb;
 }
 
 @media (min-width: 768px) {
   .trip-header {
-    grid-template-columns: 1fr 1fr; /* Side-by-side on larger screens */
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 }
 
 .trip-meta {
   display: flex;
-  justify-content: center; /* Centering trip meta */
+  margin-top: 2.5rem;
+  flex-direction: column;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1.5rem;
   font-size: 1rem;
-  color: #cbd5e0; /* Slightly lighter meta text */
+  color: #cbd5e0;
+  transition: all 0.5s ease;
+  animation: fadeInUpStagger 1s ease-out forwards;
 }
 
 .trip-meta span {
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* Increased gap */
+  gap: 0.75rem;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.trip-meta span:hover {
+  transform: translateY(-8px) rotate(3deg);
+  opacity: 0.85;
+  color: #6ee7b7;
 }
 
 .trip-meta i {
   font-size: 1.2rem;
-  color: #9ca3af; /* Medium gray icon color */
+  color: #9ca3af;
+  transition: all 0.4s ease;
+}
+
+.trip-meta i:hover {
+  transform: scale(1.3) rotate(15deg);
+  color: #6ee7b7;
 }
 
 .map-container {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  transition: all 0.5s ease;
+  animation: slideInLeft 1.2s ease-out forwards;
 }
 
 .map-container h3 {
-  color: #6ee7b7; /* Teal accent color */
+  color: #6ee7b7;
   text-align: center;
-  font-size: 1.5rem; /* Larger heading */
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  transition: all 0.4s ease;
+}
+
+.map-container h3:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #8bf6cb;
 }
 
 .map-placeholder {
-  height: 250px; /* Increased height */
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(31, 41, 55, 0.8); /* Slightly more transparent */
-  border-radius: 0.75rem; /* More rounded corners */
+  background: rgba(31, 41, 55, 0.8);
+  border-radius: 0.75rem;
   color: #d1d5db;
   font-size: 1.1rem;
-  border: 2px dashed #4b5563; /* Dashed border */
+  border: 2px dashed #4b5563;
+  transition: all 0.5s ease;
+  animation: pulseRotate 2.5s infinite ease-in-out;
+}
+
+.map-placeholder:hover {
+  transform: scale(1.05) rotate(5deg);
+  border-color: #6ee7b7;
 }
 
 /* 🗓 Itinerary Section */
 .itinerary-section {
-  background: rgba(17, 24, 39, 0.8); /* Slightly darker, more transparent */
+  background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(12px);
   padding: 2.5rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  animation: slideInLeftRotate 1.4s ease-out forwards;
+}
+
+.itinerary-section:hover {
+  transform: scale(1.02) rotate(1deg);
 }
 
 .itinerary-section h3 {
-  color: #6ee7b7; /* Teal accent color */
+  color: #6ee7b7;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 1.5rem; /* Larger heading */
+  font-size: 1.5rem;
   font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.itinerary-section h3:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #8bf6cb;
 }
 
 .itinerary-wrapper {
   position: relative;
-  padding: 0; /* Removed padding, will adjust card positioning */
+  padding: 0;
+  transition: all 0.5s ease;
 }
 
 .itinerary-wrapper::before {
@@ -494,30 +193,39 @@ body {
   top: 0;
   width: 4px;
   height: 100%;
-  background: linear-gradient(to bottom, #6ee7b7, #1e293b); /* Teal gradient */
+  background: linear-gradient(to bottom, #6ee7b7, #1e293b);
   transform: translateX(-50%);
-  z-index: 1; /* Ensure the line is behind the cards */
+  z-index: 1;
+  transition: all 0.5s ease;
+  animation: growLine 2s ease-out forwards;
 }
 
 .day-card {
-  background: rgba(31, 41, 55, 0.95); /* Slightly more opaque */
-  padding: 2rem; /* Increased padding */
-  border-radius: 1rem; /* More rounded corners */
-  margin: 2rem 0; /* Increased vertical margin */
+  background: rgba(31, 41, 55, 0.95);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 2rem 0;
   position: relative;
-  width: 100%; /* Full width on small screens */
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
+  width: 100%;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  animation: fadeInUpDelay 1s ease-out forwards;
+}
+
+.day-card:hover {
+  transform: translateY(-15px) rotate(2deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: #6ee7b7;
 }
 
 @media (min-width: 768px) {
   .day-card {
-    width: 48%; /* ~50% width on larger screens for side-by-side layout */
+    width: 48%;
   }
 
   .day-card:nth-child(odd) {
-    margin-right: 52%; /* Space between cards */
+    margin-right: 52%;
     margin-left: 0;
   }
 
@@ -530,23 +238,28 @@ body {
 .day-card::before {
   content: attr(data-day);
   position: absolute;
-  top: 2rem; /* Increased top position */
-  width: 36px; /* Increased size of the circle */
+  top: 2rem;
+  width: 36px;
   height: 36px;
-  background: #6ee7b7; /* Teal circle */
+  background: #6ee7b7;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem; /* Larger font size */
-  font-weight: 600; /* Semi-bold font */
-  color: #0f172a; /* Dark text color inside the circle */
-  z-index: 2; /* Ensure the circle is above the line */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow to the circle */
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0f172a;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+
+.day-card:hover::before {
+  transform: scale(1.2) rotate(10deg);
 }
 
 .day-card:nth-child(odd)::before {
-  right: -1.5rem; /* Adjusted positioning */
+  right: -1.5rem;
   left: auto;
 }
 
@@ -556,160 +269,219 @@ body {
 }
 
 .day-header h4 {
-  color: #e2e8f0; /* Lighter heading color */
-  margin-bottom: 1.5rem; /* Increased margin */
-  font-size: 1.25rem; /* Larger heading */
+  color: #e2e8f0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.day-header h4:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #6ee7b7;
 }
 
 .activity-list {
   padding: 0;
   list-style: none;
+  transition: all 0.5s ease;
 }
 
 .activity-item {
   display: flex;
-  gap: 1.5rem; /* Increased gap */
-  padding: 1.25rem; /* Increased padding */
+  gap: 1.5rem;
+  padding: 1.25rem;
   background: rgba(31, 41, 55, 0.8);
-  border-radius: 0.75rem; /* More rounded corners */
-  margin-bottom: 1rem; /* Increased margin */
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.activity-item:hover {
+  transform: translateY(-8px) rotate(1deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-color: #6ee7b7;
 }
 
 .activity-time {
-  min-width: 80px; /* Increased width */
-  color: #6ee7b7; /* Teal time color */
-  font-weight: 600; /* Semi-bold font */
+  min-width: 80px;
+  color: #6ee7b7;
+  font-weight: 600;
   font-size: 1.1rem;
+  transition: all 0.4s ease;
+}
+
+.activity-time:hover {
+  transform: scale(1.1);
+  color: #8bf6cb;
 }
 
 .activity-desc {
   flex: 1;
   color: #f9fafb;
   font-size: 1.1rem;
+  transition: all 0.4s ease;
+}
+
+.activity-desc:hover {
+  transform: translateX(5px);
 }
 
 /* 🏨 Hotel Section */
 .hotel-section {
-  margin-top: 4rem; /* Increased margin */
+  margin-top: 4rem;
+  transition: all 0.5s ease;
+  animation: slideInRightScale 1.4s ease-out forwards;
 }
 
 .hotel-section h3 {
-  color: #6ee7b7; /* Teal accent color */
+  color: #6ee7b7;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: 1.5rem; /* Larger heading */
+  font-size: 1.5rem;
   font-weight: 600;
+  transition: all 0.4s ease;
 }
 
-.hotel-wrapper {
+.hotel-section h3:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #8bf6cb;
+}
+
+.hotel-list {
   display: grid;
-  grid-template-columns: 1fr; /* Stack on small screens */
-  gap: 2rem; /* Increased gap */
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 0;
+  list-style: none;
+  transition: all 0.5s ease;
 }
 
 @media (min-width: 768px) {
-  .hotel-wrapper {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(350px, 1fr)
-    ); /* 2 columns on larger screens */
+  .hotel-list {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
 
-.hotel-card {
+.hotel-list-item {
   background: rgba(31, 41, 55, 0.95);
   padding: 2rem;
   border-radius: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Slightly stronger shadow */
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.hotel-card:hover {
-  transform: translateY(-0.5rem); /* Slight lift on hover */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Increased shadow on hover */
-}
-
-.hotel-image {
-  width: 100%;
-  height: 250px; /* Increased height */
-  object-fit: cover;
-  border-radius: 0.75rem; /* More rounded corners */
-  margin-bottom: 1.5rem; /* Increased margin */
+.hotel-list-item:hover {
+  transform: translateY(-12px) rotate(2deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: #6ee7b7;
 }
 
 .hotel-name {
   color: #fff;
   margin-bottom: 1rem;
-  font-size: 1.5rem; /* Larger heading */
+  font-size: 1.5rem;
   font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.hotel-name:hover {
+  transform: scale(1.1) rotate(2deg);
+  color: #6ee7b7;
 }
 
 .hotel-rating {
   color: #a0aec0;
   margin-bottom: 0.75rem;
   font-size: 1rem;
+  transition: all 0.4s ease;
+}
+
+.hotel-rating:hover {
+  transform: translateX(5px);
+  color: #d1d5db;
 }
 
 .hotel-price {
-  color: #6ee7b7; /* Teal price color */
+  color: #6ee7b7;
   margin-bottom: 1rem;
-  font-size: 1.25rem; /* Larger price */
+  font-size: 1.25rem;
   font-weight: 600;
+  transition: all 0.4s ease;
+}
+
+.hotel-price:hover {
+  transform: scale(1.1);
+  color: #8bf6cb;
 }
 
 .hotel-description {
   color: #f9fafb;
   font-size: 1.1rem;
-  line-height: 1.7; /* Increased line height */
+  line-height: 1.7;
+  transition: all 0.4s ease;
+}
+
+.hotel-description:hover {
+  transform: translateX(5px);
 }
 
 /* 📱 Responsive Design (Tablet and Mobile) */
 @media (max-width: 768px) {
   .trip-header {
-    grid-template-columns: 1fr; /* Stack on small screens */
+    grid-template-columns: 1fr;
     padding: 1.5rem;
+    transition: all 0.5s ease;
   }
 
   .trip-details h2 {
-    font-size: 1.75rem; /* Smaller heading on mobile */
+    font-size: 1.75rem;
+    transition: all 0.4s ease;
   }
 
   .trip-meta {
     gap: 1rem;
+    transition: all 0.5s ease;
   }
 
   .map-container h3 {
     font-size: 1.25rem;
+    transition: all 0.4s ease;
   }
 
   .itinerary-section {
     padding: 1.5rem;
+    transition: all 0.5s ease;
   }
 
   .itinerary-wrapper::before {
-    left: 1rem; /* Adjust line position on mobile */
+    left: 1rem;
+    transition: all 0.5s ease;
   }
 
   .day-card {
     width: 100%;
     margin: 1.5rem auto;
+    transition: all 0.5s ease;
   }
 
   .day-card::before {
-    left: 1rem !important; /* Adjust circle position on mobile */
+    left: 1rem !important;
     right: auto !important;
     top: 1.5rem;
+    transition: all 0.4s ease;
   }
 
   .activity-time {
     min-width: 60px;
+    transition: all 0.4s ease;
   }
 
-  .hotel-wrapper {
+  .hotel-list {
     grid-template-columns: 1fr;
+    transition: all 0.5s ease;
   }
 }
 
@@ -717,17 +489,188 @@ body {
 @media (max-width: 480px) {
   .trip-meta {
     flex-direction: column;
+    transition: all 0.5s ease;
   }
 
   .trip-meta span {
     flex-direction: column;
     align-items: flex-start;
+    transition: all 0.4s ease;
   }
+
   .activity-item {
     flex-direction: column;
     gap: 0.5rem;
+    transition: all 0.5s ease;
   }
+
   .activity-time {
     min-width: auto;
+    transition: all 0.4s ease;
   }
+}
+
+/* Enhanced Keyframes */
+@keyframes fadeInBody {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes slideUpExpand {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInScalePulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.05) rotate(5deg);
+  }
+}
+
+@keyframes slideInDownBounce {
+  0% {
+    transform: translateY(-150px) rotate(-5deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(30px) rotate(3deg);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-15px) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(5deg);
+  }
+  70% {
+    transform: scale(0.9) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes fadeInUpStagger {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes pulseRotate {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes slideInLeftRotate {
+  0% {
+    transform: translateX(-150px) rotate(-15deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes growLine {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUpDelay {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes slideInRightScale {
+  0% {
+    transform: translateX(150px) scale(0.8) rotate(5deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Staggered animation delays */
+.trip-meta span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.trip-meta span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.trip-meta span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.day-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.day-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.day-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.day-card:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.day-card:nth-child(5) {
+  animation-delay: 1s;
+}
+.day-card:nth-child(6) {
+  animation-delay: 1.2s;
 }
