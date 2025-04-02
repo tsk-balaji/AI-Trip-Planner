@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("email", formData.email); // Store email in localStorage before sending it
 
     try {
       // Step 1: Login user and retrieve auth token
@@ -38,8 +37,9 @@ const Login = () => {
 
       console.log("User Details Saved:", localStorage.getItem("userDetails"));
 
-      // Step 3: Redirect to dashboard
-      navigate("/generate-trip");
+      setTimeout(() => {
+        navigate("/generate-trip");
+      }, 100); // 100ms delay
     } catch (error) {
       console.error(error); // Log error details for debugging
       setError(error.response?.data?.message || "Login failed");

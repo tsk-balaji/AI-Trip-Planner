@@ -5,7 +5,8 @@ import { Navigate } from "react-router-dom";
 import Cookies from "js-cookie"; // Import js-cookie
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = Boolean(Cookies.get("authToken")); // Check if logged in
+  const authToken = Cookies.get("authToken");
+  const isLoggedIn = Boolean(authToken);
 
   if (!isLoggedIn) {
     // Redirect to login if not authenticated
