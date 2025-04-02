@@ -18,6 +18,8 @@ const generationConfig = {
   responseMimeType: "application/json", // Explicitly requesting JSON format
 };
 
+const fallbackImageURL = "https://example.com/default-hotel.jpg"; // Fallback image URL
+
 exports.geminiAI = async (req, res) => {
   try {
     const {
@@ -137,22 +139,23 @@ exports.geminiAI = async (req, res) => {
 
     console.log("✅ API Response received.");
 
-    // Extract and parse response
     let tripPlan;
     try {
       const responseText = response.response.text();
-      // Remove triple backticks if present
-      const cleanedResponseText =
-        responseText.startsWith("```json") && responseText.endsWith("```")
-          ? responseText.slice(7, -3) // Remove the first 7 characters and the last 3 characters
-          : responseText;
+      const cleanedResponseText = responseText
+        .replace(/^```json|```$/g, "")
+        .trim();
+      tripPlan = JSON.parse(cleanedResponseText);
 
-      // Check if the response is already valid JSON
-      if (typeof cleanedResponseText === "object") {
-        tripPlan = cleanedResponseText;
-      } else {
-        // Attempt to parse the response as JSON
-        tripPlan = JSON.parse(cleanedResponseText);
+      // Validate and set fallback for hotel image URLs
+      if (tripPlan.hotelOptions) {
+        tripPlan.hotelOptions = tripPlan.hotelOptions.map((hotel) => ({
+          ...hotel,
+          imageURL:
+            hotel.imageURL && hotel.imageURL.startsWith("http")
+              ? hotel.imageURL
+              : fallbackImageURL,
+        }));
       }
     } catch (error) {
       console.error(
@@ -163,7 +166,7 @@ exports.geminiAI = async (req, res) => {
       );
       return res.status(500).json({
         error:
-          "Invalid AI response format.  Please check the raw response from the AI.",
+          "Invalid AI response format. Please check the raw response from the AI.",
         rawResponse: response.response.text(),
       });
     }

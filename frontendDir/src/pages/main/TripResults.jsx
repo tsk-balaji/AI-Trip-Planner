@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
-import RouteMap from "./Components/RouteMap";
+// import { motion } from "framer-motion"; // Only import the necessary functions
 import { TripContext } from "./utils/TripContext";
 import "../main/TripResults.css";
 
-const PLACEHOLDER_IMAGE_URL =
-  "https://via.placeholder.com/300x200?text=Hotel+Image";
-
-const handleImageError = (event) => {
-  event.target.src = PLACEHOLDER_IMAGE_URL;
-  event.target.onerror = null;
-};
+// Dynamically import RouteMap component for tree shaking
+const RouteMap = React.lazy(() => import("./Components/RouteMap"));
 
 const formatDate = (dateString) => {
   if (!dateString || isNaN(new Date(dateString).getTime())) {
@@ -28,52 +23,65 @@ const formatDate = (dateString) => {
 
 const TripResults = () => {
   const { tripData } = useContext(TripContext);
-  console.log("Trip Data:", tripData);
-  const tripPlan = tripData || null;
 
-  if (!tripPlan.tripDetails) {
-    console.error("Trip details are missing:", tripPlan);
+  if (!tripData) return <div>Loading...</div>; // Early return if data is missing
+
+  const { tripDetails, itinerary, hotelOptions, mapUIData } = tripData;
+
+  if (!tripDetails) {
     return <div>Error: Trip details not available.</div>;
   }
 
-  if (!tripPlan.itinerary) {
-    console.error("Trip itinerary is missing:", tripPlan);
-  }
+  const metaVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-  if (!tripPlan.hotelOptions) {
-    console.error("Trip hotel options are missing:", tripPlan);
-  }
-
-  if (!tripPlan.mapUIData) {
-    console.error("Trip map data is missing:", tripPlan);
-  }
+  const metaItemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   return (
     <div className="trip-results-container">
       <section className="trip-header">
-        <div className="trip-details">
-          <h2 className="trip-title">
-            {`Travel Plan: ${tripPlan?.tripDetails?.startCity ?? "N/A"} → ${
-              tripPlan?.tripDetails?.endCity ?? "N/A"
+        <div className="trip-header-content col-6">
+          <h3 className="trip-title">
+            {`Travel Plan: ${tripDetails?.startCity ?? "N/A"} → ${
+              tripDetails?.endCity ?? "N/A"
             }`}
-          </h2>
-          <div className="trip-meta">
-            <span className="meta-item">
-              {formatDate(tripPlan?.tripDetails?.startDate)} -{" "}
-              {formatDate(tripPlan?.tripDetails?.endDate)}
-            </span>
-            <span className="meta-item">
-              {tripPlan?.tripDetails?.travelers ?? "N/A"} Travelers
-            </span>
-            <span className="meta-item">
-              Budget: {tripPlan?.tripDetails?.budget ?? "N/A"}
-            </span>
-          </div>
+          </h3>
+          <motion.div
+            className="trip-meta"
+            variants={metaVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.span className="meta-item" variants={metaItemVariants}>
+              From {formatDate(tripDetails?.startDate)} Till{" "}
+              {formatDate(tripDetails?.endDate)}
+            </motion.span>
+            <motion.span className="meta-item" variants={metaItemVariants}>
+              No of Travelers : {tripDetails?.travelers ?? "N/A"}
+            </motion.span>
+            <motion.span className="meta-item" variants={metaItemVariants}>
+              Budget: {tripDetails?.budget ?? "N/A"}
+            </motion.span>
+          </motion.div>
         </div>
-        <div className="map-container">
+        <div className="map-container col-6">
           <h3 className="map-title">Route Overview</h3>
-          {tripPlan?.mapUIData ? (
-            <RouteMap mapUIData={tripPlan.mapUIData} />
+          {mapUIData ? (
+            <React.Suspense fallback={<div>Loading Map...</div>}>
+              <RouteMap mapUIData={mapUIData} />
+            </React.Suspense>
           ) : (
             <div className="map-placeholder">Map data not available.</div>
           )}
@@ -83,8 +91,8 @@ const TripResults = () => {
       <section className="itinerary-section">
         <h3 className="section-title">Your Itinerary</h3>
         <div className="itinerary-wrapper">
-          {tripPlan.itinerary ? (
-            Object.entries(tripPlan.itinerary).map(([dayKey, day], index) => (
+          {itinerary ? (
+            Object.entries(itinerary).map(([dayKey, day], index) => (
               <div key={dayKey} className="day-card">
                 <div className="day-header">
                   <h4 className="day-title">
@@ -109,17 +117,16 @@ const TripResults = () => {
         </div>
       </section>
 
-      {tripPlan.hotelOptions?.length > 0 && (
+      {hotelOptions?.length > 0 && (
         <section className="hotel-section">
           <h3 className="section-title">Hotel Suggestions</h3>
           <div className="hotel-wrapper">
-            {tripPlan.hotelOptions.map((hotel, index) => (
+            {hotelOptions.map((hotel, index) => (
               <div key={index} className="hotel-card">
                 <img
-                  src={hotel.imageURL || PLACEHOLDER_IMAGE_URL}
+                  src={hotel.imageURL}
                   alt={`Image of ${hotel.name}`}
                   className="hotel-image"
-                  onError={handleImageError}
                 />
                 <div className="hotel-details">
                   <h4 className="hotel-name">{hotel.name}</h4>
