@@ -12,9 +12,6 @@ AI Trip Planner is a full-stack web application that helps users plan their trip
 - **Role-Based Access**: Free and premium plans for users.
 - **Dockerized Deployment**: Easily deployable using Docker and Docker Compose.
 
-## Project Structure
-AI-Trip-Planner/ ├── backendDir/ # Backend code (Node.js, Express, MongoDB) │ ├── config/ # Database configuration │ ├── controllers/ # API controllers │ ├── middleware/ # Middleware for authentication │ ├── models/ # Mongoose models │ ├── routes/ # API routes │ ├── Dockerfile # Dockerfile for backend │ └── server.js # Entry point for backend ├── frontendDir/ # Frontend code (React, Vite) │ ├── src/ # React components and pages │ ├── public/ # Static assets │ ├── Dockerfile # Dockerfile for frontend │ └── package.json # Frontend dependencies ├── docker-compose.yml # Docker Compose configuration ├── LICENSE # License file └── README.md # Project documentation
-
 ## Flow Chart
 
 Below is the flow chart depicting the application's architecture and workflow:
