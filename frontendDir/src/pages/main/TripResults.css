@@ -644,7 +644,25 @@ body {
     opacity: 1;
   }
 }
+.generate-another-trip-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.generate-another-trip-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.generate-another-trip-button:hover {
+  background-color: #0056b3;
+}
 /* Staggered animation delays */
 .trip-meta span:nth-child(1) {
   animation-delay: 0.2s;

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { TripContext } from "./utils/TripContext";
 import "../main/TripResults.css";
+import { useNavigate } from "react-router-dom";
 
 // Dynamically import RouteMap component for tree shaking
 const RouteMap = React.lazy(() => import("./Components/RouteMap"));
@@ -23,6 +24,7 @@ const formatDate = (dateString) => {
 
 const TripResults = () => {
   const { tripData } = useContext(TripContext);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   if (!tripData) return <div>Loading...</div>; // Early return if data is missing
 
@@ -47,6 +49,10 @@ const TripResults = () => {
   const metaItemVariants = {
     hidden: { opacity: 0, x: -20 },
     visible: { opacity: 1, x: 0 },
+  };
+
+  const handleGenerateAnotherTrip = () => {
+    navigate("/generate-trip"); // Navigate to generate-trip route
   };
 
   return (
@@ -140,6 +146,14 @@ const TripResults = () => {
           </ul>
         </section>
       )}
+      <div className="generate-another-trip-container">
+        <button
+          className="generate-another-trip-button"
+          onClick={handleGenerateAnotherTrip}
+        >
+          Generate Another Trip
+        </button>
+      </div>
     </div>
   );
 };
