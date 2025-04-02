@@ -2,9 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types"; // Import PropTypes
 import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie"; // Import js-cookie
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = Boolean(localStorage.getItem("authToken")); // Check if logged in
+  const isLoggedIn = Boolean(Cookies.get("authToken")); // Check if logged in
 
   if (!isLoggedIn) {
     // Redirect to login if not authenticated
