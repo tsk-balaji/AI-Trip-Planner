@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import RouteMap from "./Components/RouteMap"; // Assuming this component is ready
-import { TripContext } from "./utils/TripContext"; // Assuming correct context setup
-import "../main/TripResults.css"; // Ensure CSS paths are correct
+import RouteMap from "./Components/RouteMap";
+import { TripContext } from "./utils/TripContext";
+import "../main/TripResults.css";
 
 const PLACEHOLDER_IMAGE_URL =
   "https://via.placeholder.com/300x200?text=Hotel+Image";
